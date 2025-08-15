@@ -1,11 +1,13 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const { initializeDatabase } = require('./database.js');
+const { getConfig } = require('./config.js');
 
 function createWindow() {
+  const config = getConfig();
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: config.window.width,
+    height: config.window.height,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
