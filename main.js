@@ -1,5 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
+const { initializeDatabase } = require('./database.js');
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
@@ -14,6 +15,7 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+  initializeDatabase();
   createWindow();
 
   app.on('activate', function () {
