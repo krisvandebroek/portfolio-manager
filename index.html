@@ -6,5 +6,34 @@
 </head>
 <body>
     <h1>Portfolio Manager</h1>
+
+    <h2>Add New Fund</h2>
+    <form id="add-fund-form">
+        <label for="fund-name">Fund Name:</label><br>
+        <input type="text" id="fund-name" name="fund-name"><br>
+
+        <label for="fund-identifier">Identifier:</label><br>
+        <input type="text" id="fund-identifier" name="fund-identifier"><br>
+
+        <label for="target-gain">Target Gain %:</label><br>
+        <input type="number" id="target-gain" name="target-gain" step="0.01"><br><br>
+
+        <input type="submit" value="Save Fund">
+    </form>
+
+    <script src="renderer.js"></script>
+
+    <h2>My Portfolio</h2>
+    <table id="funds-table">
+        <thead>
+            <tr>
+                <th>Fund Name</th>
+                <th>Identifier</th>
+                <th>Target %</th>
+            </tr>
+        </thead>
+        <tbody id="funds-list">
+        </tbody>
+    </table>
 </body>
 </html>

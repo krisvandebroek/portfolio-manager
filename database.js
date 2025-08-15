@@ -36,6 +36,29 @@ function initializeDatabase() {
   db.exec(createTransactionsTableSql);
 }
 
+/**
+ * Adds a new fund to the database.
+ * @param {object} fund - The fund object to add.
+ * @param {string} fund.name - The name of the fund.
+ * @param {string} fund.identifier - The identifier of the fund.
+ * @param {number} fund.targetGain - The target gain percentage for the fund.
+ */
+function addFund(fund) {
+  const stmt = db.prepare('INSERT INTO funds (name, identifier, target_gain_percentage) VALUES (?, ?, ?)');
+  stmt.run(fund.name, fund.identifier, fund.targetGain);
+}
+
+/**
+ * Retrieves all funds from the database.
+ * @returns {Array} An array of all funds.
+ */
+function getAllFunds() {
+  const stmt = db.prepare('SELECT * FROM funds');
+  return stmt.all();
+}
+
 module.exports = {
   initializeDatabase,
+  addFund,
+  getAllFunds,
 };

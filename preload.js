@@ -1,2 +1,6 @@
-// This file is intentionally left blank.
-// It is created to prevent the Electron app from crashing due to a missing preload script.
+const { contextBridge, ipcRenderer } = require('electron');
+
+contextBridge.exposeInMainWorld('api', {
+  addFund: (data) => ipcRenderer.send('add-fund', data),
+  getFunds: () => ipcRenderer.invoke('get-funds')
+});
