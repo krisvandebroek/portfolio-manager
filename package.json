@@ -4,7 +4,8 @@
   "description": "A simple portfolio manager application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "postinstall": "electron-rebuild"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +14,7 @@
     "better-sqlite3-multiple-ciphers": "^12.2.0"
   },
   "devDependencies": {
-    "electron": "^28.0.0"
+    "electron": "^28.0.0",
+    "electron-rebuild": "^3.2.9"
   }
 }
