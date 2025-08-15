@@ -1,6 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
-const { initializeDatabase, addFund } = require('./database.js');
+const { initializeDatabase, addFund, getAllFunds } = require('./database.js');
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
@@ -21,6 +21,10 @@ app.whenReady().then(() => {
   ipcMain.on('add-fund', (event, fundData) => {
     addFund(fundData);
     console.log('Fund added successfully:', fundData);
+  });
+
+  ipcMain.handle('get-funds', async () => {
+    return getAllFunds();
   });
 
   app.on('activate', function () {
