@@ -30,10 +30,32 @@
                 <th>Fund Name</th>
                 <th>Identifier</th>
                 <th>Target %</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody id="funds-list">
         </tbody>
     </table>
+
+    <!-- Add Purchase Modal -->
+    <div id="add-purchase-modal" style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+        <div style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%;">
+            <form id="add-purchase-form">
+                <h2>Add Purchase</h2>
+                <input type="hidden" id="fund-id-for-purchase" />
+                <label for="purchase-date">Purchase Date:</label><br>
+                <input type="date" id="purchase-date" name="purchase-date"><br>
+
+                <label for="purchase-units">Units:</label><br>
+                <input type="number" id="purchase-units" name="purchase-units" step="any"><br>
+
+                <label for="purchase-price">Price Per Unit:</label><br>
+                <input type="number" id="purchase-price" name="purchase-price" step="any"><br><br>
+
+                <button type="submit">Save Purchase</button>
+                <button type="button" id="cancel-purchase">Cancel</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
