@@ -48,7 +48,17 @@ function addFund(fund) {
   stmt.run(fund.name, fund.identifier, fund.targetGain);
 }
 
+/**
+ * Retrieves all funds from the database.
+ * @returns {Array} An array of all funds.
+ */
+function getAllFunds() {
+  const stmt = db.prepare('SELECT * FROM funds');
+  return stmt.all();
+}
+
 module.exports = {
   initializeDatabase,
   addFund,
+  getAllFunds,
 };
