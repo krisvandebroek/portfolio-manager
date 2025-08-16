@@ -12,12 +12,6 @@ async function loadFunds() {
             <td><button class="add-purchase-btn" data-fund-id="${fund.id}">Add Purchase</button></td>
         `;
         fundsList.appendChild(row);
-
-        const addPurchaseBtn = row.querySelector('.add-purchase-btn');
-        addPurchaseBtn.addEventListener('click', () => {
-            currentFundId = fund.id;
-            addPurchaseModal.style.display = 'block';
-        });
     });
 }
 
@@ -49,6 +43,13 @@ const addPurchaseForm = document.getElementById('add-purchase-form');
 const cancelPurchaseBtn = document.getElementById('cancel-purchase');
 const fundsList = document.getElementById('funds-list');
 let currentFundId = null;
+
+fundsList.addEventListener('click', (event) => {
+    if (event.target.classList.contains('add-purchase-btn')) {
+        currentFundId = event.target.getAttribute('data-fund-id');
+        addPurchaseModal.style.display = 'block';
+    }
+});
 
 cancelPurchaseBtn.addEventListener('click', () => {
     addPurchaseModal.style.display = 'none';
