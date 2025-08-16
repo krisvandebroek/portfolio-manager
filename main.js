@@ -1,7 +1,34 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, Menu } = require('electron');
 const path = require('path');
 const { initializeDatabase, addFund, getAllFunds } = require('./database.js');
 const { getConfig } = require('./config.js');
+
+const menuTemplate = [
+  {
+    label: 'File',
+    submenu: [
+      { role: 'quit' }
+    ]
+  },
+  {
+    label: 'Edit',
+    submenu: [
+      { role: 'undo' },
+      { role: 'redo' },
+      { type: 'separator' },
+      { role: 'cut' },
+      { role: 'copy' },
+      { role: 'paste' }
+    ]
+  },
+  {
+    label: 'View',
+    submenu: [
+      { role: 'reload' },
+      { role: 'toggleDevTools' }
+    ]
+  }
+];
 
 function createWindow() {
   const config = getConfig();
@@ -19,6 +46,9 @@ function createWindow() {
 app.whenReady().then(() => {
   initializeDatabase();
   createWindow();
+
+  const menu = Menu.buildFromTemplate(menuTemplate);
+  Menu.setApplicationMenu(menu);
 
   ipcMain.on('add-fund', (event, fundData) => {
     addFund(fundData);
