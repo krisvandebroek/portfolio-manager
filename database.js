@@ -57,8 +57,18 @@ function getAllFunds() {
   return stmt.all();
 }
 
+/**
+ * Adds a new transaction to the database.
+ * @param {object} transaction - The transaction object to add.
+ */
+function addTransaction(transaction) {
+  const stmt = db.prepare('INSERT INTO transactions (fund_id, transaction_type, transaction_date, units, price_per_unit) VALUES (?, ?, ?, ?, ?)');
+  stmt.run(transaction.fund_id, transaction.transaction_type, transaction.transaction_date, transaction.units, transaction.price_per_unit);
+}
+
 module.exports = {
   initializeDatabase,
   addFund,
   getAllFunds,
+  addTransaction,
 };
