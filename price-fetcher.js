@@ -1,4 +1,4 @@
-const axios = require('axios');
+const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 const database = require('./database');
 
@@ -10,8 +10,9 @@ const database = require('./database');
 async function fetchPriceForIdentifier(identifier) {
   const url = `https://markets.ft.com/data/funds/tearsheet/summary?s=${identifier}`;
   try {
-    const { data } = await axios.get(url);
-    const $ = cheerio.load(data);
+    const response = await fetch(url);
+    const html = await response.text();
+    const $ = cheerio.load(html);
     // The class name in the task description was incorrect.
     // The correct selector is 'span.mod-ui-data-list__value'.
     const priceText = $('span.mod-ui-data-list__value').first().text();
