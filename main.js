@@ -4,6 +4,18 @@ const { initializeDatabase, addFund, getAllFunds } = require('./database.js');
 const { getConfig } = require('./config.js');
 const { updateAllFundPrices } = require('./price-fetcher.js');
 
+// Polyfill for File object
+global.File = class File {
+  constructor(parts, filename, options = {}) {
+    this.parts = parts;
+    this.filename = filename;
+    this.options = options;
+    this.lastModified = options.lastModified || Date.now();
+    this.size = parts.reduce((size, part) => size + part.length, 0);
+    this.type = options.type || '';
+  }
+};
+
 function createWindow() {
   const config = getConfig();
   const mainWindow = new BrowserWindow({
