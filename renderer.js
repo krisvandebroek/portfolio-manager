@@ -36,3 +36,7 @@ document.getElementById('add-fund-form').addEventListener('submit', (event) => {
 
 // Load funds when the page loads
 loadFunds();
+
+document.getElementById('refresh-prices-btn').addEventListener('click', () => {
+    window.api.refreshPrices();
+});
