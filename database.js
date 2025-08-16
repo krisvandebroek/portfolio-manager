@@ -12,7 +12,9 @@ const createFundsTableSql = `
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     identifier TEXT NOT NULL UNIQUE,
-    target_gain_percentage REAL DEFAULT 10
+    target_gain_percentage REAL DEFAULT 10,
+    current_price REAL DEFAULT 0,
+    last_updated TEXT
   );
 `;
 
@@ -57,8 +59,19 @@ function getAllFunds() {
   return stmt.all();
 }
 
+/**
+ * Updates the current price and last updated timestamp for a fund.
+ * @param {number} fundId - The ID of the fund to update.
+ * @param {number} price - The new price of the fund.
+ */
+function updateFundPrice(fundId, price) {
+  const stmt = db.prepare('UPDATE funds SET current_price = ?, last_updated = CURRENT_TIMESTAMP WHERE id = ?');
+  stmt.run(price, fundId);
+}
+
 module.exports = {
   initializeDatabase,
   addFund,
   getAllFunds,
+  updateFundPrice,
 };

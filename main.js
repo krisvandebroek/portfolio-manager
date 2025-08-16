@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const { initializeDatabase, addFund, getAllFunds } = require('./database.js');
 const { getConfig } = require('./config.js');
+const { updateAllFundPrices } = require('./price-fetcher.js');
 
 function createWindow() {
   const config = getConfig();
@@ -27,6 +28,12 @@ app.whenReady().then(() => {
 
   ipcMain.handle('get-funds', async () => {
     return getAllFunds();
+  });
+
+  ipcMain.on('refresh-prices', async () => {
+    console.log('Refreshing prices...');
+    await updateAllFundPrices();
+    console.log('Price refresh complete.');
   });
 
   app.on('activate', function () {
