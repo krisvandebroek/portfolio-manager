@@ -1,6 +1,4 @@
 const axios = require('axios');
-const httpAdapter = require('axios/lib/adapters/http');
-axios.defaults.adapter = httpAdapter;
 const cheerio = require('cheerio');
 const database = require('./database');
 
