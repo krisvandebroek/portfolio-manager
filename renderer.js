@@ -9,6 +9,7 @@ async function loadFunds() {
             <td>${fund.name}</td>
             <td>${fund.identifier}</td>
             <td>${fund.target_gain_percentage}</td>
+            <td>${fund.current_price}</td>
         `;
         fundsList.appendChild(row);
     });
